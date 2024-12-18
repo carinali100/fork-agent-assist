@@ -81,6 +81,7 @@ def cloud_pubsub_handler(request, data_type):
             logging.warning('Warning: {}'.format(msg))
             return True
 
+        conversation_name = data_object['conversation']
         conversation_name = get_conversation_name_without_location(conversation_name)
         logging.debug('conversation_name: {0}, conversation_name_without_location: {1}'.format(data_object['conversation'], conversation_name))
 
