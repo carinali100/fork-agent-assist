@@ -65,6 +65,7 @@ A backend infrastructure for Agent Assist integration, including Cloud Pub/Sub I
 ![](images/structure.jpg)
 
 ## [Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/publisher)
+
 Cloud Pub/Sub topics should be configured in conversation profiles. Agent Assist will publish suggestions, new messages and conversation lifecycle related events to the topic, with  suggestions in the form of [HumanAgentAssistantEvent](https://cloud.google.com/dialogflow/es/docs/reference/rest/v2beta1/HumanAgentAssistantEvent) and both new messages and conversation lifecycle events and new recognition result notification events are packed as [ConversationEvent](https://cloud.google.com/dialogflow/es/docs/reference/rest/v2beta1/ConversationEvent). For each conversation profile, these four kinds of event messages are published to different topics. A sample conversation lifecycle event message can be `{"conversation":"projects/your-project-id/locations/global/conversations/your-conversation-id","type":"CONVERSATION_STARTED"}`, which indicates the start of a conversation.
 
 ## Cloud Pub/Sub Interceptor (deployed on [Cloud Run](https://cloud.google.com/run/docs))
