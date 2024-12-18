@@ -31,6 +31,7 @@ redis_host = os.environ.get('REDISHOST', 'localhost')
 redis_port = int(os.environ.get('REDISPORT', 6379))
 redis_client = redis.StrictRedis(host=redis_host, port=redis_port)
 
+
 def get_conversation_name_without_location(conversation_name):
     """Returns a conversation name without its location id."""
     conversation_name_without_location = conversation_name
@@ -80,11 +81,8 @@ def cloud_pubsub_handler(request, data_type):
             logging.warning('Warning: {}'.format(msg))
             return True
 
-        conversation_name = data_object['conversation']
-        conversation_name = get_conversation_name_without_location(
-            conversation_name)
-        logging.debug('conversation_name: {0}, conversation_name_without_location: {1}'.format(
-            data_object['conversation'], conversation_name))
+        conversation_name = get_conversation_name_without_location(conversation_name)
+        logging.debug('conversation_name: {0}, conversation_name_without_location: {1}'.format(data_object['conversation'], conversation_name))
 
         # Emits messages to redis pub/sub
         msg_data = {'conversation_name': conversation_name,
